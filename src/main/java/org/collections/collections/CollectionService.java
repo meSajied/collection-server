@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 class CollectionService {
   @Autowired
-  CollectionRepository collectionRepository;
+  private CollectionRepository collectionRepository;
 
   List<Collection> getLatestCollections() {
     return null;

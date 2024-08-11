@@ -18,10 +18,6 @@ public class User {
   @CollectionTable(name = "permissions", joinColumns = @JoinColumn(name = "username"))
   private Set<Permissions> permissions;
 
-  // Constructors
-
-
-  // Getters and Setters
   public String getUsername() {
     return username;
   }
@@ -36,5 +32,20 @@ public class User {
 
   public void setName(String name) {
     this.name = name;
+  }
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
+  }
+
+  public Set<Permissions> getPermissions() {
+    return permissions;
+  }
+
+  public void setPermissions(Set<Permissions> permissions) {
+    this.permissions = permissions;
   }
 }
