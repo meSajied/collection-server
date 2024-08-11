@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 class CollectionService {
-  @Autowired
-  private CollectionRepository collectionRepository;
+  private final CollectionRepository collectionRepository;
+
+  CollectionService(CollectionRepository collectionRepository) {
+    this.collectionRepository = collectionRepository;
+  }
 
   List<Collection> getLatestCollections() {
     return null;
@@ -34,7 +37,6 @@ class CollectionService {
     
     return collectionRepository.save(existingData);
   }
-
 
   void deleteCollectionBy(String id) {
     collectionRepository.deleteById(id);

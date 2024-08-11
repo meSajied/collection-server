@@ -3,6 +3,8 @@ package org.collections.users;
 import jakarta.persistence.*;
 import java.util.Set;
 
+import org.collections.collections.Collection;
+
 @Entity
 public class User {
   @Id
@@ -18,34 +20,45 @@ public class User {
   @CollectionTable(name = "permissions", joinColumns = @JoinColumn(name = "username"))
   private Set<Permissions> permissions;
 
-  public String getUsername() {
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+  private Set<Collection> collections;
+
+  String getUsername() {
     return username;
   }
 
-  public void setUsername(String username) {
+  void setUsername(String username) {
     this.username = username;
   }
 
-  public String getName() {
+  String getName() {
     return name;
   }
 
-  public void setName(String name) {
+  void setName(String name) {
     this.name = name;
   }
-  public Role getRole() {
+  Role getRole() {
     return role;
   }
 
-  public void setRole(Role role) {
+  void setRole(Role role) {
     this.role = role;
   }
 
-  public Set<Permissions> getPermissions() {
+  Set<Permissions> getPermissions() {
     return permissions;
   }
 
-  public void setPermissions(Set<Permissions> permissions) {
+  void setPermissions(Set<Permissions> permissions) {
     this.permissions = permissions;
+  }
+
+  public Set<Collection> getCollections() {
+    return collections;
+  }
+
+  void setCollections(Set<Collection> collections) {
+    this.collections = collections;
   }
 }

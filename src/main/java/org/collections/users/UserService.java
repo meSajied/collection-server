@@ -9,8 +9,11 @@ import java.util.Optional;
 @Service
 @Transactional
 class UserService {
-  @Autowired
-  private UserRepository userRepository;
+  private final UserRepository userRepository;
+
+  UserService(UserRepository userRepository) {
+    this.userRepository = userRepository;
+  }
 
   Optional<User> getUser(String username) {
     return userRepository.findByUsername(username);
