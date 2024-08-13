@@ -3,7 +3,6 @@ package org.collections.collections;
 import jakarta.persistence.*;
 import org.collections.users.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,6 +19,9 @@ public class Collection {
 
   @ManyToMany(cascade = CascadeType.ALL)
   List<Categories> categories;
+
+  @OneToMany(mappedBy = "collection")
+  List<Comments> comments;
 
   public String getId() {
     return id;
