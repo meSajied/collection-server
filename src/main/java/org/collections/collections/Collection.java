@@ -1,16 +1,25 @@
 package org.collections.collections;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+import org.collections.users.User;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Collection {
   @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
-
   private String name;
   private String description;
+
+  @ManyToOne
+  @JoinColumn(name="username")
+  private User user;
+
+  @ManyToMany(cascade = CascadeType.ALL)
+  List<Categories> categories;
 
   public String getId() {
     return id;
@@ -34,5 +43,21 @@ public class Collection {
 
   public void setDescription(String description) {
     this.description = description;
+  }
+
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(User user) {
+    this.user = user;
+  }
+
+  public List<Categories> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(List<Categories> categories) {
+    this.categories = categories;
   }
 }

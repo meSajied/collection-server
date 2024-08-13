@@ -3,49 +3,39 @@ package org.collections.collections;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/collections")
-public class CollectionController {
-  @Autowired
-  CollectionService collectionService;
+class CollectionController {
+  private final CollectionService collectionService;
 
-  @GetMapping("/hello")
-  public String hello() {
-    return "hello";
+  CollectionController(CollectionService collectionService) {
+    this.collectionService = collectionService;
   }
 
   @GetMapping("/latest")
-  public List<Collection> getLatestCollections() {
+  List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
   }
 
   @GetMapping("/largest")
-  public List<Collection> getLargestCollections() {
+  List<Collection> getLargestCollections() {
     return collectionService.getLargestCollections();
   }
 
   @PostMapping("/")
-  public Collection createCollection(@RequestBody Collection collection) {
+  Collection createCollection(@RequestBody Collection collection) {
     return collectionService.createCollection(collection);
   }
 
   @PatchMapping("/")
-  public Optional<Collection> updateCollection(@RequestBody Collection collection) {
+  Optional<Collection> updateCollection(@RequestBody Collection collection) {
     return collectionService.updateCollection(collection);
   }
 
   @DeleteMapping("/{id}")
-  public void deleteCollectionOf(@PathVariable String id) {
+  void deleteCollectionOf(@PathVariable String id) {
     collectionService.deleteCollectionBy(id);
   }
 }

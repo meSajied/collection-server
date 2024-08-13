@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan(basePackages = {"org.collections.collections", "org.collections.users"})
-@EnableJpaRepositories(basePackages = {"org.collections.collections", "org.collections.collections"})
-@ComponentScan(basePackages = {"org.collections.server", "org.collections.collections"})
+@EnableJpaRepositories(basePackages = {"org.collections.collections", "org.collections.users"})
+@ComponentScan(basePackages = {"org.collections.server", "org.collections.collections", "org.collections.users"})
 public class CollectionserverApplication {
 
 	public static void main(String[] args) {
