@@ -1,6 +1,8 @@
 package org.collections.users;
 
 import jakarta.persistence.*;
+
+import java.util.List;
 import java.util.Set;
 
 import org.collections.collections.Collection;
@@ -9,7 +11,6 @@ import org.collections.collections.Collection;
 public class User {
   @Id
   private String username;
-
   private String name;
 
   @Enumerated(EnumType.STRING)
@@ -21,44 +22,44 @@ public class User {
   private Set<Permissions> permissions;
 
   @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  private Set<Collection> collections;
+  private List<Collection> collections;
 
-  String getUsername() {
+  public String getUsername() {
     return username;
   }
 
-  void setUsername(String username) {
+  public void setUsername(String username) {
     this.username = username;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  void setName(String name) {
+  public void setName(String name) {
     this.name = name;
   }
-  Role getRole() {
+  public Role getRole() {
     return role;
   }
 
-  void setRole(Role role) {
+  public void setRole(Role role) {
     this.role = role;
   }
 
-  Set<Permissions> getPermissions() {
+  public Set<Permissions> getPermissions() {
     return permissions;
   }
 
-  void setPermissions(Set<Permissions> permissions) {
+  public void setPermissions(Set<Permissions> permissions) {
     this.permissions = permissions;
   }
 
-  public Set<Collection> getCollections() {
+  public List<Collection> getCollections() {
     return collections;
   }
 
-  void setCollections(Set<Collection> collections) {
+  public void setCollections(List<Collection> collections) {
     this.collections = collections;
   }
 }

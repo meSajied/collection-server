@@ -3,47 +3,61 @@ package org.collections.collections;
 import jakarta.persistence.*;
 import org.collections.users.User;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Collection {
   @Id
+  @GeneratedValue(strategy = GenerationType.UUID)
   private String id;
-
   private String name;
   private String description;
 
   @ManyToOne
-  @JoinColumn(name="user_id")
+  @JoinColumn(name="username")
   private User user;
 
-  String getId() {
+  @ManyToMany(cascade = CascadeType.ALL)
+  List<Categories> categories;
+
+  public String getId() {
     return id;
   }
 
-  void setId(String id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  void setName(String name) {
+  public void setName(String name) {
     this.name = name;
   }
 
-  String getDescription() {
+  public String getDescription() {
     return description;
   }
 
-  void setDescription(String description) {
+  public void setDescription(String description) {
     this.description = description;
   }
 
-  User getUser() {
+  public User getUser() {
     return user;
   }
 
-  void setUser(User user) {
+  public void setUser(User user) {
     this.user = user;
+  }
+
+  public List<Categories> getCategories() {
+    return categories;
+  }
+
+  public void setCategories(List<Categories> categories) {
+    this.categories = categories;
   }
 }
