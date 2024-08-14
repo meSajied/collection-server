@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/collections")
 class CollectionController {
   private final CollectionService collectionService;
+  private final CommentRepository commentRepository;
 
-  CollectionController(CollectionService collectionService) {
+  CollectionController(CollectionService collectionService,
+      CommentRepository commentRepository) {
     this.collectionService = collectionService;
+    this.commentRepository = commentRepository;
   }
 
   @GetMapping("/latest")
@@ -22,6 +25,11 @@ class CollectionController {
   @GetMapping("/largest")
   List<Collection> getLargestCollections() {
     return collectionService.getLargestCollections();
+  }
+
+  @GetMapping("{id}")
+  Optional<Collection> getCollectionById(@PathVariable String id) {
+    return collectionService.getCollectionById(id);
   }
 
   @PostMapping("/")
@@ -37,5 +45,10 @@ class CollectionController {
   @DeleteMapping("/{id}")
   void deleteCollectionOf(@PathVariable String id) {
     collectionService.deleteCollectionBy(id);
+  }
+
+  @PostMapping("/comments")
+  Comments addComment(@RequestBody Comments comment) {
+    return commentRepository.save(comment);
   }
 }

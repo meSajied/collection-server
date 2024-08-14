@@ -22,6 +22,10 @@ class CollectionService {
     return null;
   }
 
+  Optional<Collection> getCollectionById(String id) {
+    return collectionRepository.findById(id);
+  }
+
   Collection createCollection(Collection collection) {
     return collectionRepository.save(collection);
   }

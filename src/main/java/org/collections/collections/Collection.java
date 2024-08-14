@@ -3,14 +3,13 @@ package org.collections.collections;
 import jakarta.persistence.*;
 import org.collections.users.User;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Collection {
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  private String id;
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private int id;
   private String name;
   private String description;
 
@@ -21,11 +20,14 @@ public class Collection {
   @ManyToMany(cascade = CascadeType.ALL)
   List<Categories> categories;
 
-  public String getId() {
+  @OneToMany(mappedBy = "collection")
+  List<Comments> comments;
+
+  public int getId() {
     return id;
   }
 
-  public void setId(String id) {
+  public void setId(int id) {
     this.id = id;
   }
 
@@ -59,5 +61,13 @@ public class Collection {
 
   public void setCategories(List<Categories> categories) {
     this.categories = categories;
+  }
+
+  public List<Comments> getComments() {
+    return comments;
+  }
+
+  public void setComments(List<Comments> comments) {
+    this.comments = comments;
   }
 }
