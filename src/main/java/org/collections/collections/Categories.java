@@ -12,7 +12,7 @@ class Categories {
 
   private String name;
 
-  @ManyToMany(mappedBy = "categories")
+  @ManyToMany(cascade = CascadeType.ALL)
   List<Collection> collection;
 
   String getName() {

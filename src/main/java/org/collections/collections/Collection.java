@@ -13,14 +13,14 @@ public class Collection {
   private String name;
   private String description;
 
-  @ManyToOne
-  @JoinColumn(name="username")
+  @ManyToOne(cascade = CascadeType.ALL)
+  @JoinColumn(name="user_id")
   private User user;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy = "collection", cascade = CascadeType.ALL)
   List<Categories> categories;
 
-  @OneToMany(mappedBy = "collection")
+  @OneToMany(mappedBy = "collection", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   List<Comments> comments;
 
   public int getId() {

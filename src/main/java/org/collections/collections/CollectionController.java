@@ -9,12 +9,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/collections")
 class CollectionController {
   private final CollectionService collectionService;
-  private final CommentRepository commentRepository;
 
-  CollectionController(CollectionService collectionService,
-      CommentRepository commentRepository) {
+  CollectionController(CollectionService collectionService) {
     this.collectionService = collectionService;
-    this.commentRepository = commentRepository;
   }
 
   @GetMapping("/latest")
@@ -47,8 +44,4 @@ class CollectionController {
     collectionService.deleteCollectionBy(id);
   }
 
-  @PostMapping("/comments")
-  Comments addComment(@RequestBody Comments comment) {
-    return commentRepository.save(comment);
-  }
 }
