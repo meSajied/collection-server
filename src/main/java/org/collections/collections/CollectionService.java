@@ -22,8 +22,8 @@ class CollectionService {
     return null;
   }
 
-  Optional<Collection> getCollectionById(String id) {
-    return collectionRepository.findById(id);
+  Optional<Collection> getCollectionByUsername(String username) {
+    return collectionRepository.findByUsername(username);
   }
 
   Collection createCollection(Collection collection) {

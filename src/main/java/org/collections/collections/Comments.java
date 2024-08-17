@@ -11,6 +11,7 @@ class Comments {
   @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
   private Collection collection;
   private String comment;
+  private String username;
 
   int getId() {
     return id;
@@ -34,5 +35,12 @@ class Comments {
 
   void setComment(String comment) {
     this.comment = comment;
+  }
+
+  String getUsername() {
+    return username;
+  }
+  void setUsername(String username) {
+    this.username = username;
   }
 }

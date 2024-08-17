@@ -1,18 +1,11 @@
 package org.collections.users;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.List;
 import java.util.Set;
-
-import org.collections.collections.Collection;
 
 @Entity
 public class User {
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
   private String username;
   private String name;
 
@@ -23,17 +16,6 @@ public class User {
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "permissions", joinColumns = @JoinColumn(name = "user_id"))
   private Set<Permissions> permissions;
-
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-  @JsonIgnore
-  private List<Collection> collections;
-
-  public int getId() {
-    return id;
-  }
-  public void setId(int id) {
-    this.id = id;
-  }
 
   public String getUsername() {
     return username;
@@ -64,13 +46,5 @@ public class User {
 
   public void setPermissions(Set<Permissions> permissions) {
     this.permissions = permissions;
-  }
-
-  public List<Collection> getCollections() {
-    return collections;
-  }
-
-  public void setCollections(List<Collection> collections) {
-    this.collections = collections;
   }
 }

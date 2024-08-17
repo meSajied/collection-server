@@ -24,9 +24,9 @@ class CollectionController {
     return collectionService.getLargestCollections();
   }
 
-  @GetMapping("{id}")
-  Optional<Collection> getCollectionById(@PathVariable String id) {
-    return collectionService.getCollectionById(id);
+  @GetMapping("/{username}")
+  Optional<Collection> getCollectionByUsername(@PathVariable String username) {
+    return collectionService.getCollectionByUsername(username);
   }
 
   @PostMapping("/")

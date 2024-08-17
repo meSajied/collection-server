@@ -1,4 +1,6 @@
 HELP.md
+*.http
+*.rest
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/

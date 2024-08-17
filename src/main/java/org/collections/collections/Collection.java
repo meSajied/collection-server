@@ -12,12 +12,8 @@ public class Collection {
   private int id;
   private String name;
   private String description;
-
-  @ManyToOne(cascade = CascadeType.ALL)
-  @JoinColumn(name="user_id")
-  private User user;
-
-  @ManyToMany(mappedBy = "collection", cascade = CascadeType.ALL)
+  private String username;
+  @ManyToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   List<Categories> categories;
 
   @OneToMany(mappedBy = "collection", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
@@ -47,12 +43,12 @@ public class Collection {
     this.description = description;
   }
 
-  public User getUser() {
-    return user;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public List<Categories> getCategories() {
