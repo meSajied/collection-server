@@ -8,6 +8,7 @@ public class User {
   @Id
   private String username;
   private String name;
+  private String password;
 
   @Enumerated(EnumType.STRING)
   private Role role;
@@ -32,6 +33,15 @@ public class User {
   public void setName(String name) {
     this.name = name;
   }
+
+  public String getPassword() {
+    return password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
+  }
+
   public Role getRole() {
     return role;
   }

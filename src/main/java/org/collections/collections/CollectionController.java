@@ -3,7 +3,10 @@ package org.collections.collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.collections.utils.FileUploader;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/collections")
@@ -13,7 +16,7 @@ class CollectionController {
   CollectionController(CollectionService collectionService) {
     this.collectionService = collectionService;
   }
-
+  
   @GetMapping("/latest")
   List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
@@ -29,9 +32,15 @@ class CollectionController {
     return collectionService.getCollectionByUsername(username);
   }
 
-  @PostMapping("/")
-  Collection createCollection(@RequestBody Collection collection) {
-    return collectionService.createCollection(collection);
+  @PostMapping(value = "/")
+  String createCollection(@RequestParam("file") MultipartFile file,
+      @RequestPart Collection collection) {
+    Collection saved = collectionService.createCollection(collection);
+
+    FileUploader uploader = new FileUploader();
+    String id = String.valueOf(saved.getId());
+
+    return uploader.uploadFile(file, id);
   }
 
   @PatchMapping("/")
