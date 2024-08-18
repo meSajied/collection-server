@@ -1,7 +1,6 @@
 package org.collections.collections;
 
 import jakarta.persistence.*;
-import org.collections.users.User;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
