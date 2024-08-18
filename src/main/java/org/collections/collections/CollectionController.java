@@ -3,20 +3,19 @@ package org.collections.collections;
 import java.util.List;
 import java.util.Optional;
 
+import org.collections.utils.FileUploader;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/collections")
 class CollectionController {
   private final CollectionService collectionService;
-  private final CommentRepository commentRepository;
 
-  CollectionController(CollectionService collectionService,
-      CommentRepository commentRepository) {
+  CollectionController(CollectionService collectionService) {
     this.collectionService = collectionService;
-    this.commentRepository = commentRepository;
   }
-
+  
   @GetMapping("/latest")
   List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
@@ -27,14 +26,20 @@ class CollectionController {
     return collectionService.getLargestCollections();
   }
 
-  @GetMapping("{id}")
-  Optional<Collection> getCollectionById(@PathVariable String id) {
-    return collectionService.getCollectionById(id);
+  @GetMapping("/{username}")
+  Optional<Collection> getCollectionByUsername(@PathVariable String username) {
+    return collectionService.getCollectionByUsername(username);
   }
 
-  @PostMapping("/")
-  Collection createCollection(@RequestBody Collection collection) {
-    return collectionService.createCollection(collection);
+  @PostMapping(value = "/")
+  String createCollection(@RequestParam("file") MultipartFile file,
+      @RequestPart Collection collection) {
+    Collection saved = collectionService.createCollection(collection);
+
+    FileUploader uploader = new FileUploader();
+    String id = String.valueOf(saved.getId());
+
+    return uploader.uploadFile(file, id);
   }
 
   @PatchMapping("/")
@@ -47,8 +52,4 @@ class CollectionController {
     collectionService.deleteCollectionBy(id);
   }
 
-  @PostMapping("/comments")
-  Comments addComment(@RequestBody Comments comment) {
-    return commentRepository.save(comment);
-  }
 }

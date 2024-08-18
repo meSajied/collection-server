@@ -1,8 +1,9 @@
 package org.collections.collections;
 
 import jakarta.persistence.*;
-import org.collections.users.User;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -12,16 +13,15 @@ public class Collection {
   private int id;
   private String name;
   private String description;
-
-  @ManyToOne
-  @JoinColumn(name="username")
-  private User user;
-
-  @ManyToMany(cascade = CascadeType.ALL)
+  private String username;
+  @ManyToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   List<Categories> categories;
 
-  @OneToMany(mappedBy = "collection")
+  @OneToMany(mappedBy = "collection", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
   List<Comments> comments;
+
+  @CreationTimestamp
+  private LocalDateTime createdAt;
 
   public int getId() {
     return id;
@@ -47,12 +47,12 @@ public class Collection {
     this.description = description;
   }
 
-  public User getUser() {
-    return user;
+  public String getUsername() {
+    return username;
   }
 
-  public void setUser(User user) {
-    this.user = user;
+  public void setUsername(String username) {
+    this.username = username;
   }
 
   public List<Categories> getCategories() {
@@ -69,5 +69,13 @@ public class Collection {
 
   public void setComments(List<Comments> comments) {
     this.comments = comments;
+  }
+
+  public LocalDateTime getCreatedAt() {
+    return createdAt;
+  }
+
+  public void setCreatedAt(LocalDateTime createdAt) {
+    this.createdAt = createdAt;
   }
 }
