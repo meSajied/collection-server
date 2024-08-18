@@ -1,9 +1,11 @@
 package org.collections.collections;
 
+import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -15,11 +17,13 @@ class CollectionService {
   }
 
   List<Collection> getLatestCollections() {
-    return null;
+    Pageable top = (Pageable) PageRequest.of(0,10);
+    return collectionRepository.findLatestCollections(top);
   }
 
   List<Collection> getLargestCollections() {
-    return null;
+    Pageable top = (Pageable) PageRequest.of(0, 3);
+    return collectionRepository.findLargestCollections(top);
   }
 
   Optional<Collection> getCollectionByUsername(String username) {
