@@ -1,5 +1,7 @@
 package org.collections.collections;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -9,11 +11,18 @@ class Categories {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
-
   private String name;
 
   @ManyToMany(cascade = CascadeType.ALL)
   List<Collection> collection;
+
+  public int getId() {
+    return id;
+  }
+
+  public void setId(int id) {
+    this.id = id;
+  }
 
   String getName() {
     return name;

@@ -1,5 +1,5 @@
 package org.collections.users;
 
-enum Role {
+public enum Role {
   ADMIN, USER
 }

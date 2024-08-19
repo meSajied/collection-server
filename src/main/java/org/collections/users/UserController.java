@@ -25,7 +25,7 @@ class UserController {
 
   @PatchMapping("/")
   Optional<User> updateUser(@RequestBody User user) {
-    return userService.updateCollection(user);
+    return userService.updateUser(user);
   }
 
   @DeleteMapping("/{username}")

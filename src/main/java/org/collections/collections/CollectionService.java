@@ -4,15 +4,21 @@ import java.awt.print.Pageable;
 import java.util.List;
 import java.util.Optional;
 
+import jakarta.transaction.Transactional;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 @Service
-class CollectionService {
+@Transactional
+public class CollectionService {
   private final CollectionRepository collectionRepository;
 
   CollectionService(CollectionRepository collectionRepository) {
     this.collectionRepository = collectionRepository;
+  }
+
+  public List<Collection> findAll() {
+    return (List<Collection>) collectionRepository.findAll();
   }
 
   List<Collection> getLatestCollections() {
