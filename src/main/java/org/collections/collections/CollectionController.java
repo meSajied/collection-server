@@ -32,14 +32,17 @@ class CollectionController {
   }
 
   @PostMapping(value = "/")
-  String createCollection(@RequestParam("file") MultipartFile file,
+  String createCollection(@RequestParam(value = "file", required = false) MultipartFile file,
       @RequestPart Collection collection) {
     Collection saved = collectionService.createCollection(collection);
 
-    FileUploader uploader = new FileUploader();
-    String id = String.valueOf(saved.getId());
-
-    return uploader.uploadFile(file, id);
+    if(file != null) {
+      FileUploader uploader = new FileUploader();
+      String id = String.valueOf(saved.getId());
+      return uploader.uploadFile(file, id);
+    }else {
+      return "Collection saved";
+    }
   }
 
   @PatchMapping("/")
@@ -51,5 +54,4 @@ class CollectionController {
   void deleteCollectionOf(@PathVariable String id) {
     collectionService.deleteCollectionBy(id);
   }
-
 }

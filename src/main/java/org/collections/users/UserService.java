@@ -1,14 +1,13 @@
 package org.collections.users;
 
 import jakarta.transaction.Transactional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @Transactional
-class UserService {
+public class UserService {
   private final UserRepository userRepository;
 
   UserService(UserRepository userRepository) {
@@ -19,23 +18,41 @@ class UserService {
     return userRepository.findByUsername(username);
   }
 
+  public Optional<User> getUserByRole(Role role) {
+    return userRepository.findByRole(role);
+  }
+
   User createUser(User user) {
     return userRepository.save(user);
   }
 
-  Optional<User> updateCollection(User user) {
+  public Optional<User> updateUser(User user) {
     return userRepository.findById(user.getUsername()).map(existingData -> {
       return updateData(existingData, user);
     });
   }
 
   private User updateData(User existingData, User newData) {
-    existingData.setName(newData.getName());
+    if(existingData.getName() != null) {
+      existingData.setName(newData.getName());
+    }
+
+    if(existingData.getPassword() != null) {
+      existingData.setPassword(newData.getPassword());
+    }
+
+    if(existingData.getRole() != null && countByRole(Role.ADMIN) >= 1) {
+      existingData.setRole(newData.getRole());
+    }
 
     return userRepository.save(existingData);
   }
 
   Optional<User> deleteUserByUsername(String username) {
     return userRepository.deleteByUsername(username);
+  }
+
+  public int countByRole(Role role) {
+    return userRepository.countByRole(role);
   }
 }
