@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/admin")
-class AdminController {
+public class AdminController {
   private final CollectionService collectionService;
   private final UserService userService;
 
@@ -23,16 +23,16 @@ class AdminController {
   }
 
   @GetMapping("/list")
-  Optional<User> getAllAdmin() {
+  public Optional<User> getAllAdmin() {
     return userService.getUserByRole(Role.valueOf("ADMIN"));
   }
 
   @GetMapping("/collections")
-  List<Collection> getAllCollection() {
+  public List<Collection> getAllCollection() {
     return collectionService.findAll();
   }
   @PatchMapping("/")
-  String editAdmin(@RequestBody User user) {
+  public String editAdmin(@RequestBody User user) {
     Role role = user.getRole();
 
     if(role.equals(Role.USER) &&

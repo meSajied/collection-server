@@ -2,7 +2,6 @@ package org.collections.users;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 interface UserRepository extends CrudRepository<User, String>{

@@ -9,7 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/collections")
-class CollectionController {
+public class CollectionController {
   private final CollectionService collectionService;
 
   CollectionController(CollectionService collectionService) {
@@ -17,22 +17,22 @@ class CollectionController {
   }
   
   @GetMapping("/latest")
-  List<Collection> getLatestCollections() {
+  public List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
   }
 
   @GetMapping("/largest")
-  List<Collection> getLargestCollections() {
+  public List<Collection> getLargestCollections() {
     return collectionService.getLargestCollections();
   }
 
   @GetMapping("/{username}")
-  Optional<Collection> getCollectionByUsername(@PathVariable String username) {
+  public Optional<Collection> getCollectionByUsername(@PathVariable String username) {
     return collectionService.getCollectionByUsername(username);
   }
 
   @PostMapping(value = "/")
-  String createCollection(@RequestParam(value = "file", required = false) MultipartFile file,
+  public String createCollection(@RequestParam(value = "file", required = false) MultipartFile file,
       @RequestPart Collection collection) {
     Collection saved = collectionService.createCollection(collection);
 
@@ -46,12 +46,12 @@ class CollectionController {
   }
 
   @PatchMapping("/")
-  Optional<Collection> updateCollection(@RequestBody Collection collection) {
+  public Optional<Collection> updateCollection(@RequestBody Collection collection) {
     return collectionService.updateCollection(collection);
   }
 
   @DeleteMapping("/{id}")
-  void deleteCollectionOf(@PathVariable String id) {
+  public void deleteCollectionOf(@PathVariable String id) {
     collectionService.deleteCollectionBy(id);
   }
 }

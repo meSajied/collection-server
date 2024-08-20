@@ -1,7 +1,5 @@
 package org.collections.collections;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -16,7 +14,7 @@ public class Collection {
   private String name;
   private String description;
   private String username;
-  @ManyToMany(mappedBy = "collection", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(mappedBy = "collection", fetch = FetchType.EAGER)
   List<Categories> categories;
 
   @OneToMany(mappedBy = "collection", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

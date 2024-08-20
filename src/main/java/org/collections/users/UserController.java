@@ -6,7 +6,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-class UserController {
+public class UserController {
   private final UserService userService;
 
   UserController(UserService userService) {
@@ -14,22 +14,22 @@ class UserController {
   }
 
   @GetMapping("/{username}")
-  Optional<User> getUser(@PathVariable String username) {
+  public Optional<User> getUser(@PathVariable String username) {
     return userService.getUser(username);
   }
 
   @PostMapping("/")
-  User addUser(@RequestBody User user) {
+  public User addUser(@RequestBody User user) {
     return userService.createUser(user);
   }
 
   @PatchMapping("/")
-  Optional<User> updateUser(@RequestBody User user) {
+  public Optional<User> updateUser(@RequestBody User user) {
     return userService.updateUser(user);
   }
 
   @DeleteMapping("/{username}")
-  Optional<User> deleteUser(@PathVariable String username) {
+  public Optional<User> deleteUser(@PathVariable String username) {
     return userService.deleteUserByUsername(username);
   }
 }

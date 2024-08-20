@@ -15,7 +15,7 @@ public class CommentController {
   }
 
   @PostMapping("/")
-  Comments addComment(@RequestBody Comments comment) {
+  public Comments addComment(@RequestBody Comments comment) {
     return commentRepository.save(comment);
   }
 }
