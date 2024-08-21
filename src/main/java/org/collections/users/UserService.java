@@ -14,7 +14,7 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  Optional<User> getUser(String username) {
+  public Optional<User> getUser(String username) {
     return userRepository.findByUsername(username);
   }
 
@@ -22,7 +22,7 @@ public class UserService {
     return userRepository.findByRole(role);
   }
 
-  User createUser(User user) {
+  public User createUser(User user) {
     return userRepository.save(user);
   }
 
@@ -48,7 +48,7 @@ public class UserService {
     return userRepository.save(existingData);
   }
 
-  Optional<User> deleteUserByUsername(String username) {
+  public Optional<User> deleteUserByUsername(String username) {
     return userRepository.deleteByUsername(username);
   }
 

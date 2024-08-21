@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 		"org.collections.users", "org.collections.admin"})
 @ComponentScan(basePackages = {"org.collections.server",
 		"org.collections.collections", "org.collections.users",
-		"org.collections.admin"})
+		"org.collections.admin", "org.collections.security"})
 public class CollectionserverApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(CollectionserverApplication.class, args);

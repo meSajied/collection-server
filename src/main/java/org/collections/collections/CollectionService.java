@@ -1,6 +1,6 @@
 package org.collections.collections;
 
-import java.awt.print.Pageable;
+import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Optional;
 
