@@ -14,7 +14,7 @@ public class Collection {
   private String name;
   private String description;
   private String username;
-  @ManyToMany(mappedBy = "collection", fetch = FetchType.EAGER)
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
   List<Categories> categories;
 
   @OneToMany(mappedBy = "collection", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

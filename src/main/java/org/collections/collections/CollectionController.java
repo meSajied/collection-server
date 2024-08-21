@@ -15,14 +15,14 @@ public class CollectionController {
   CollectionController(CollectionService collectionService) {
     this.collectionService = collectionService;
   }
-  
+
   @GetMapping("/latest")
   public List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
   }
 
   @GetMapping("/largest")
-  public List<Collection> getLargestCollections() {
+  public List<Categories> getLargestCollections() {
     return collectionService.getLargestCollections();
   }
 

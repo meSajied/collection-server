@@ -15,7 +15,4 @@ interface CollectionRepository extends CrudRepository<Collection, String> {
 
   @Query("SELECT c FROM Collection c ORDER BY c.createdAt DESC")
   List<Collection> findLatestCollections(Pageable pageable);
-
-  @Query("SELECT c FROM Collection c ORDER BY SIZE(c.categories) DESC")
-  List<Collection> findLargestCollections(Pageable pageable);
 }
