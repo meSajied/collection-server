@@ -1,10 +1,11 @@
 package org.collections.users;
 
 import jakarta.persistence.*;
+
 import java.util.Set;
 
 @Entity
-public class User {
+public class User<T> {
   @Id
   private String username;
   private String name;
