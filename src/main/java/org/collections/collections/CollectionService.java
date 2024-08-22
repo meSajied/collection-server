@@ -23,6 +23,10 @@ public class CollectionService {
     return (List<Collection>) collectionRepository.findAll();
   }
 
+  public Optional<Collection> findById(int id) {
+    return collectionRepository.findById(id);
+  }
+
   List<Collection> getLatestCollections() {
     Pageable top = (Pageable) PageRequest.of(0,10);
     return collectionRepository.findLatestCollections(top);
@@ -33,7 +37,7 @@ public class CollectionService {
     return categoryRepository.findLargestCategories(top);
   }
 
-  Optional<Collection> getCollectionByUsername(String username) {
+  List<Collection> getCollectionByUsername(String username) {
     return collectionRepository.findByUsername(username);
   }
 
