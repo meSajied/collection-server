@@ -1,5 +1,6 @@
 package org.collections.collections;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -11,7 +12,8 @@ class Categories {
   private int id;
   private String name;
 
-  @ManyToMany(cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy = "categories", cascade = CascadeType.ALL)
+  @JsonIgnore
   List<Collection> collection;
 
   public int getId() {
@@ -22,11 +24,11 @@ class Categories {
     this.id = id;
   }
 
-  String getName() {
+  public String getName() {
     return name;
   }
 
-  void setName(String name) {
+  public void setName(String name) {
     this.name = name;
   }
 

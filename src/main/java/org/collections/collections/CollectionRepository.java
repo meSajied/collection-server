@@ -10,12 +10,9 @@ import java.util.Optional;
 
 @Repository
 interface CollectionRepository extends CrudRepository<Collection, String> {
-  Optional<Collection> findByUsername(String username);
+  List<Collection> findByUsername(String username);
   Optional<Collection> findById(int id);
 
   @Query("SELECT c FROM Collection c ORDER BY c.createdAt DESC")
   List<Collection> findLatestCollections(Pageable pageable);
-
-  @Query("SELECT c FROM Collection c ORDER BY SIZE(c.categories) DESC")
-  List<Collection> findLargestCollections(Pageable pageable);
 }

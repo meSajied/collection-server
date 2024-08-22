@@ -12,13 +12,19 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class CollectionService {
   private final CollectionRepository collectionRepository;
+  private final CategoryRepository categoryRepository;
 
-  CollectionService(CollectionRepository collectionRepository) {
+  public CollectionService(CollectionRepository collectionRepository, CategoryRepository categoryRepository) {
     this.collectionRepository = collectionRepository;
+    this.categoryRepository = categoryRepository;
   }
 
   public List<Collection> findAll() {
     return (List<Collection>) collectionRepository.findAll();
+  }
+
+  public Optional<Collection> findById(int id) {
+    return collectionRepository.findById(id);
   }
 
   List<Collection> getLatestCollections() {
@@ -26,12 +32,12 @@ public class CollectionService {
     return collectionRepository.findLatestCollections(top);
   }
 
-  List<Collection> getLargestCollections() {
+  List<Categories> getLargestCollections() {
     Pageable top = (Pageable) PageRequest.of(0, 3);
-    return collectionRepository.findLargestCollections(top);
+    return categoryRepository.findLargestCategories(top);
   }
 
-  Optional<Collection> getCollectionByUsername(String username) {
+  List<Collection> getCollectionByUsername(String username) {
     return collectionRepository.findByUsername(username);
   }
 

@@ -1,46 +1,49 @@
 package org.collections.collections;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
-class Comments {
+public class Comments {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private int id;
 
   @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+  @JsonIgnore
   private Collection collection;
   private String comment;
   private String username;
 
-  int getId() {
+  public int getId() {
     return id;
   }
 
-  void setId(int id) {
+  public void setId(int id) {
     this.id = id;
   }
 
-  Collection getCollection() {
+  public Collection getCollection() {
     return collection;
   }
 
-  void setCollection(Collection collection) {
+  public void setCollection(Collection collection) {
     this.collection = collection;
   }
 
-  String getComment() {
+  public String getComment() {
     return comment;
   }
 
-  void setComment(String comment) {
+  public void setComment(String comment) {
     this.comment = comment;
   }
 
-  String getUsername() {
+  public String getUsername() {
     return username;
   }
-  void setUsername(String username) {
+
+  public void setUsername(String username) {
     this.username = username;
   }
 }

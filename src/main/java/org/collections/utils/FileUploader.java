@@ -11,7 +11,7 @@ public class FileUploader {
       return "Please select a file to upload";
     }
 
-    String UPLOAD_DIR = getUploadDir("/uploads/");
+    String UPLOAD_DIR = getUploadDir();
     File directory = new File(UPLOAD_DIR);
 
     if (!directory.exists()) {
@@ -28,8 +28,7 @@ public class FileUploader {
     }
   }
 
-  private String getUploadDir(String s) {
-    String UPLOAD_DIR = System.getProperty("user.dir");
-    return UPLOAD_DIR + s;
+  private String getUploadDir() {
+    return new File(System.getProperty("user.dir"), "src/main/resources/static/uploads/").getAbsolutePath();
   }
 }

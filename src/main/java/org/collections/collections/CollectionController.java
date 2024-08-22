@@ -1,9 +1,16 @@
 package org.collections.collections;
 
+import java.net.MalformedURLException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
 import org.collections.utils.FileUploader;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -15,19 +22,24 @@ public class CollectionController {
   CollectionController(CollectionService collectionService) {
     this.collectionService = collectionService;
   }
-  
+
   @GetMapping("/latest")
   public List<Collection> getLatestCollections() {
     return collectionService.getLatestCollections();
   }
 
   @GetMapping("/largest")
-  public List<Collection> getLargestCollections() {
+  public List<Categories> getLargestCollections() {
     return collectionService.getLargestCollections();
   }
 
-  @GetMapping("/{username}")
-  public Optional<Collection> getCollectionByUsername(@PathVariable String username) {
+  @GetMapping("/id/{id}")
+  public Optional<Collection> getCollectionById(@PathVariable int id) {
+    return collectionService.findById(id);
+  }
+
+  @GetMapping("/user/{username}")
+  public List<Collection> getCollectionByUsername(@PathVariable String username) {
     return collectionService.getCollectionByUsername(username);
   }
 
@@ -42,6 +54,24 @@ public class CollectionController {
       return uploader.uploadFile(file, id);
     }else {
       return "Collection saved";
+    }
+  }
+
+  @GetMapping("/uploads/{filename}")
+  public ResponseEntity<Resource> getFile(@PathVariable String filename) {
+    try {
+      Path file = Paths.get("uploads/" + filename);
+      Resource resource = new UrlResource(file.toUri());
+
+      if (resource.exists() || resource.isReadable()) {
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+            .body(resource);
+      } else {
+        throw new RuntimeException("Could not read the file!");
+      }
+    } catch (MalformedURLException e) {
+      throw new RuntimeException("Error: " + e.getMessage());
     }
   }
 

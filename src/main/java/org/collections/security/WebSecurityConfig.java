@@ -1,5 +1,6 @@
 package org.collections.security;
 
+import java.util.Arrays;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -33,10 +34,10 @@ public class WebSecurityConfig {
     })
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(r -> {r
-          .requestMatchers("/collections/latest", "/collections/largest").permitAll()
+          .requestMatchers("/collections/**", "/comments/**").permitAll()
           .requestMatchers(HttpMethod.POST, "/user/", "/user/login").permitAll()
           .requestMatchers("/admin/**").hasRole("ADMIN")
-          .requestMatchers("/user/**").hasAnyRole("ADMIN", "USER")
+          .requestMatchers("/user/**").permitAll()
           .anyRequest().authenticated();
         })
         .authenticationProvider(authenticationProvider)
@@ -48,11 +49,9 @@ public class WebSecurityConfig {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("http://localhost:3000"));  // Correctly specify the allowed origin without a trailing slash
-    configuration.setAllowedMethods(List.of("GET", "POST", "PATCH", "DELETE", "OPTIONS"));  // Specify allowed methods
-    configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
-    configuration.setAllowCredentials(true);  // Allow credentials if needed
-
+    configuration.setAllowedOrigins(Arrays.asList("*"));
+    configuration.setAllowedMethods(Arrays.asList("*"));
+    configuration.setAllowedHeaders(Arrays.asList("*"));
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
