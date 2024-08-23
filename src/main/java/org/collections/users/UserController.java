@@ -48,26 +48,26 @@ public class UserController {
     if (authentication != null) {
       new SecurityContextLogoutHandler().logout(request, response, authentication);
     }
-    return ResponseEntity.ok("User logged out successfully.");
+    return ResponseEntity.ok("AppUser logged out successfully.");
   }
 
   @GetMapping("/{username}")
-  public Optional<User> getUser(@PathVariable String username) {
+  public Optional<AppUser> getUser(@PathVariable String username) {
     return userService.getUser(username);
   }
 
   @PostMapping("/")
-  public User addUser(@RequestBody User user) {
+  public AppUser addUser(@RequestBody AppUser user) {
     return userService.createUser(user);
   }
 
   @PatchMapping("/")
-  public Optional<User> updateUser(@RequestBody User user) {
+  public Optional<AppUser> updateUser(@RequestBody AppUser user) {
     return userService.updateUser(user);
   }
 
   @DeleteMapping("/{username}")
-  public Optional<User> deleteUser(@PathVariable String username) {
+  public Optional<AppUser> deleteUser(@PathVariable String username) {
     return userService.deleteUserByUsername(username);
   }
 }

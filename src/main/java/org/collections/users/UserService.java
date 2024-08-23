@@ -14,25 +14,25 @@ public class UserService {
     this.userRepository = userRepository;
   }
 
-  public Optional<User> getUser(String username) {
+  public Optional<AppUser> getUser(String username) {
     return userRepository.findByUsername(username);
   }
 
-  public Optional<User> getUserByRole(Role role) {
+  public Optional<AppUser> getUserByRole(Role role) {
     return userRepository.findByRole(role);
   }
 
-  public User createUser(User user) {
+  public AppUser createUser(AppUser user) {
     return userRepository.save(user);
   }
 
-  public Optional<User> updateUser(User user) {
+  public Optional<AppUser> updateUser(AppUser user) {
     return userRepository.findById(user.getUsername()).map(existingData -> {
       return updateData(existingData, user);
     });
   }
 
-  private User updateData(User existingData, User newData) {
+  private AppUser updateData(AppUser existingData, AppUser newData) {
     if(existingData.getName() != null) {
       existingData.setName(newData.getName());
     }
@@ -48,7 +48,7 @@ public class UserService {
     return userRepository.save(existingData);
   }
 
-  public Optional<User> deleteUserByUsername(String username) {
+  public Optional<AppUser> deleteUserByUsername(String username) {
     return userRepository.deleteByUsername(username);
   }
 

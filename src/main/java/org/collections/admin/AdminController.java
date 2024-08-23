@@ -3,7 +3,7 @@ package org.collections.admin;
 import org.collections.collections.Collection;
 import org.collections.collections.CollectionService;
 import org.collections.users.Role;
-import org.collections.users.User;
+import org.collections.users.AppUser;
 import org.collections.users.UserService;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,7 +23,7 @@ public class AdminController {
   }
 
   @GetMapping("/list")
-  public Optional<User> getAllAdmin() {
+  public Optional<AppUser> getAllAdmin() {
     return userService.getUserByRole(Role.valueOf("ADMIN"));
   }
 
@@ -32,7 +32,7 @@ public class AdminController {
     return collectionService.findAll();
   }
   @PatchMapping("/")
-  public String editAdmin(@RequestBody User user) {
+  public String editAdmin(@RequestBody AppUser user) {
     Role role = user.getRole();
 
     if(role.equals(Role.USER) &&
