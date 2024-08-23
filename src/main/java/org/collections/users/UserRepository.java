@@ -4,10 +4,10 @@ import java.util.Optional;
 
 import org.springframework.data.repository.CrudRepository;
 
-interface UserRepository extends CrudRepository<User, String>{
-  Optional<User> findByUsername(String username);
-  Optional<User> findByRole(Role role);
-  Optional<User> deleteByUsername(String username);
+interface UserRepository extends CrudRepository<AppUser, String>{
+  Optional<AppUser> findByUsername(String username);
+  Optional<AppUser> findByRole(Role role);
+  Optional<AppUser> deleteByUsername(String username);
   int countByRole(Role role);
 
 }

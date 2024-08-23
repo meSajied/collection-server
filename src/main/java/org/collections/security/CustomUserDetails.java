@@ -1,23 +1,21 @@
 package org.collections.security;
 
-import org.collections.users.User;
+import org.collections.users.AppUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
-  private final User user;
+  private final AppUser user;
 
-  public CustomUserDetails(User user) {
+  public CustomUserDetails(AppUser user) {
     this.user = user;
   }
 
-  public User getUser() {
+  public AppUser getUser() {
     return user;
   }
 
