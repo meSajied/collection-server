@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import java.util.Set;
 
 @Entity
-public class User<T> {
+public class User {
   @Id
   private String username;
   private String name;

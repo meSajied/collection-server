@@ -21,6 +21,7 @@ public class Collection {
   List<Comments> comments;
 
   @CreationTimestamp
+  @Column(columnDefinition = "DATETIME")
   private LocalDateTime createdAt;
 
   public int getId() {
