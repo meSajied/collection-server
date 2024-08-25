@@ -44,8 +44,9 @@ public class CollectionController {
   }
 
   @PostMapping(value = "/")
-  public String createCollection(@RequestParam(value = "file", required = false) MultipartFile file,
+  public String createCollection(@RequestPart(value = "file", required = false) MultipartFile file,
       @RequestPart Collection collection) {
+
     Collection saved = collectionService.createCollection(collection);
 
     if(file != null) {
@@ -55,6 +56,7 @@ public class CollectionController {
     }else {
       return "Collection saved";
     }
+    
   }
 
   @GetMapping("/uploads/{filename}")
