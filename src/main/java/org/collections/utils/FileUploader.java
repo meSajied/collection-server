@@ -19,7 +19,7 @@ public class FileUploader {
     }
 
     try {
-      File saveFile = new File(UPLOAD_DIR + fileName + ".png");
+      File saveFile = new File(UPLOAD_DIR + "/" + fileName + ".png");
       file.transferTo(saveFile);
 
       return "File uploaded successfully: " + fileName;
