@@ -52,6 +52,7 @@ public class WebSecurityConfig {
     configuration.setAllowedOrigins(List.of("https://collection-client.onrender.com/", "http://localhost:3000/"));
     configuration.setAllowedMethods(Arrays.asList("*"));
     configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
