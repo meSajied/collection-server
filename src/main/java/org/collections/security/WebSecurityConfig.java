@@ -40,8 +40,8 @@ public class WebSecurityConfig {
           .requestMatchers("/user/**").permitAll()
           .anyRequest().authenticated();
         })
-        .authenticationProvider(authenticationProvider)
-        .formLogin(Customizer.withDefaults());
+        //.formLogin(Customizer.withDefaults());
+        .httpBasic(Customizer.withDefaults());
 
     return http.build();
   }
@@ -68,10 +68,5 @@ public class WebSecurityConfig {
     return http.getSharedObject(AuthenticationManagerBuilder.class)
         .authenticationProvider(authenticationProvider)
         .build();
-  }
-
-  @Bean
-  PasswordEncoder passwordEncoder() {
-    return NoOpPasswordEncoder.getInstance();
   }
 }
