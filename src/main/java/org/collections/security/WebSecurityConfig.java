@@ -40,8 +40,8 @@ public class WebSecurityConfig {
           .requestMatchers("/user/**").permitAll()
           .anyRequest().authenticated();
         })
-        .authenticationProvider(authenticationProvider)
-        .formLogin(Customizer.withDefaults());
+        //.formLogin(Customizer.withDefaults());
+        .httpBasic(Customizer.withDefaults());
 
     return http.build();
   }
@@ -49,9 +49,10 @@ public class WebSecurityConfig {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(List.of("https://collection-client.onrender.com/", "http://localhost:3000/"));
+    configuration.setAllowedOrigins(List.of("https://collection-client.onrender.com", "http://localhost:3000/"));
     configuration.setAllowedMethods(Arrays.asList("*"));
     configuration.setAllowedHeaders(Arrays.asList("*"));
+    configuration.setAllowCredentials(true);
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
@@ -67,10 +68,5 @@ public class WebSecurityConfig {
     return http.getSharedObject(AuthenticationManagerBuilder.class)
         .authenticationProvider(authenticationProvider)
         .build();
-  }
-
-  @Bean
-  PasswordEncoder passwordEncoder() {
-    return NoOpPasswordEncoder.getInstance();
   }
 }
